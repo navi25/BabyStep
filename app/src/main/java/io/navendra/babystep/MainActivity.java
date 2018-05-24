@@ -1,36 +1,27 @@
 package io.navendra.babystep;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     static String TAG = MainActivity.class.getSimpleName();
 
+    ImageView mImageView = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        final Button button = findViewById(R.id.helloButton);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                OpenHelloWorldActivity();
-//            }
-//        });
-//
-//        final Button resultButton = findViewById(R.id.resultButton);
-//        resultButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                OpenHelloWorldActivityForResult();
-//            }
-//        });
-
     }
 
     public void onHelloButtonClick(View v){
@@ -39,6 +30,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void onHResultButtonClick(View v){
         OpenHelloWorldActivityForResult();
+    }
+
+    public void onImplicitIntentButtonClick(View v){
+        OpenCameraActivity();
+    }
+
+    void OpenCameraActivity(){
+        Intent openCameraActivityIntent = new Intent(this,CameraActivity.class);
+        // Verify that the intent will resolve to an activity
+        if (openCameraActivityIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(openCameraActivityIntent);
+        }else{
+            Log.d(TAG,String.format(Constants.ACTIVITY_NOT_FOUND,CameraActivity.TAG));
+        }
     }
 
 
@@ -65,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     //Starting An Activity For Result- Function End
+
+
 
 
     // This method is called when the second activity finishes
