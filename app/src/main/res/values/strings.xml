@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BabyStep</string>
+    <string name="hello_world_welcome">Welcome to Hello World Activity!</string>
 </resources>
